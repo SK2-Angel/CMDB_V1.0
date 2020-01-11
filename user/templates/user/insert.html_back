@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8"/>
+      <title>用户添加</title>
+
+  </head>
+  <body>
+    <form method="POST" action="{% url 'user:insert'%}">      
+      {% csrf_token %}
+      {% if errors %}
+         {% for key,error in errors.items %}
+            {{ error }}<br/>
+         {% endfor %}
+      {% endif %}
+      用户名：<input type="text" name="user_name" value="{{user.name}}"/><br/>
+      密码：<input type="text" name="password" value="{{user.password}}"/><br/>
+      联系方式：<input type="text" name="tel" value="{{user.tel}}"/><br/>
+      年龄：<input type="text" name="age" value="{{user.age}}"/><br/>
+      性别：<input type="radio" name="sex" value="1"{% if user.sex != 0 %} checked="checked"{% endif %}/>男
+      <input type="radio" name="sex" value="0"{% if user.sex == 0 %} checked="checked"{% endif %}/>女<br/>
+      <input type="submit" value="添加"/>
+    </form>
+   查看用户:<a href = "{% url 'user:index' %}">查看</a><br/>
+  </body>
+</html>
+
+
+

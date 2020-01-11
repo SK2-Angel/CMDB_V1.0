@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8"/>
+      <title>用户登录</title>
+
+  </head>
+  <body>
+    <form method="POST" action="{% url 'user:login'     %}">
+      {% csrf_token %}
+      {% if errors %}
+         {% for key,error in errors.items %}
+            {{ error }}<br/>
+         {% endfor %}
+      {% endif %}
+      用户名：<input type="text" name="name" value="{{name}}"/><br/>
+      密码:  <input type="password" name="password" value=""/><br/>
+      <input type="submit" value="登录"/>
+    </form>
+   添加用户:<a href = "{% url 'user:insert' %}?uid={{0}}">添加</a><br/>
+  </body>
+</html>
+

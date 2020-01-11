@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8"/>
+      <title>用户管理</title>
+  </head>
+  <body>
+       <table border="1">
+         <thead>
+            <tr>
+              <th> 姓名</th>
+               <th> 年龄</th>
+               <th> 性别</th>
+               <th> 联系方式</th>
+               <th>操作</th>
+            </tr>
+         </thead>
+         <tbody>
+          {% for user in users %}
+          <tr>
+            <td>{{user.name}}</td>
+             <td>{{user.age}}</td>
+
+             <td>
+              {% if user.sex == 1 %}
+                男
+              {%else%}
+                女
+              {%endif%}
+             </td>
+             <td>{{user.tel}}</td>
+             <td>
+             <a href="{% url 'user:view' %}?uid={{ user.id }}">编辑</a>
+              {% if request.session.user.id != id%}
+             <a href = "{% url 'user:delete' %}?uid={{user.id}}">删除</a>
+              {% endif%}
+             </td>
+          </tr>
+          {% endfor %}
+         </tbody>
+
+       </table>
+   当前登录用户是:{{request.session.user.name}}<a href = "{% url 'user:loginout' %}">退出登录</a><br/>
+   修改用户密码:<a href = "{% url 'user:re_password' %}">修改密码</a>
+  </body>
+</html>
+
+

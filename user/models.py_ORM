@@ -1,0 +1,15 @@
+#enconding: utf-8
+from django.db import models
+
+
+
+
+class User(models.Model):
+  name=models.CharField(max_length=32,null=False,default='')
+  password = models.CharField(max_length=512, null=False, default='')
+  age = models.IntegerField(null=False, default=0)
+  tel = models.CharField(max_length=32, null=False, default='')
+  sex = models.BooleanField(null=False, default=True)
+  addr= models.CharField(max_length=128,null=False,default='')
+  create_time=models.DateTimeField(null=False)
+

@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+
+    <title>用户添加</title>
+
+   <link rel="stylesheet" type="text/css" href={% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}>
+
+    <!-- Custom styles for this template -->
+    <link href={% static 'navbar.css' %} rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">添加用户</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href = "{% url 'user:index' %}">返回用户列表</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <form method="POST" action="{% url 'user:insert'%}" class="form-horizontal">
+            {% csrf_token %}
+            {% if errors %}
+               {% for key,error in errors.items %}
+                <div class="alert alert-danger" role="alert">{{error}}</div>
+               {% endfor %}
+            {% endif %}
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-10">
+              <input type="text" name="user_name" value="{{user.name}}" class="form-control" id="inputEmail3" placeholder="用户名">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-10">
+              <input type="password"  name="password" value="{{user.password}}" class="form-control" id="inputEmail3" placeholder="密码">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">联系方式</label>
+            <div class="col-sm-10">
+              <input type="text"  name="tel" value="{{user.tel}}" class="form-control" id="inputEmail3" placeholder="联系方式">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">年龄</label>
+            <div class="col-sm-10">
+              <input type="text"  name="age" value="{{user.age}}" class="form-control" id="inputEmail3" placeholder="年龄">
+            </div>
+          </div>
+           <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 ">性别</label>
+            <button type="radio"  name="sex" value="1"{% if user.sex != 0 %} checked="checked"{% endif %}>男</button>
+            <button type="radio"  name="sex" value="0"{% if user.sex == 0 %} checked="checked"{% endif %}>女</button>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">添加</button>
+          </form>
+      </div>
+
+    </div>
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
